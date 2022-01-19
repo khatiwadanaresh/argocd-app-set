@@ -12,10 +12,10 @@ spec:
       - cluster: in-cluster
         url: https://kubernetes.default.svc
   template:
-    project: default
     metadata:
       name: '{{cluster}}-nginx'
     spec:
+      project: default
       source:
         repoURL: https://github.com/khatiwadanaresh/hello-world.git
         targetRevision: HEAD
