@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: nginx
+spec:
+  generators:
+  - list:
+      elements:
+      - cluster: gke-we1
+        url: https://35.230.54.8
+      - cluster: in-cluster
+        url: https://kubernetes.default.svc
+  template:
+    project: default
+    metadata:
+      name: '{{cluster}}-nginx'
+    spec:
+      source:
+        repoURL: https://github.com/khatiwadanaresh/hello-world.git
+        targetRevision: HEAD
+        path: ./
+      destination:
+        server: '{{url}}'
+        namespace: abc
